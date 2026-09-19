@@ -14,13 +14,14 @@ class CalculatorRequestHandler(SimpleHTTPRequestHandler):
 			request_data = json.loads(self.rfile.read(content_length))
 			first_number = float(request_data["first"])
 			second_number = float(request_data["second"])
-			if not math.isfinite(first_number) or not math.isfinite(second_number):
+			third_number = float(request_data["third"])
+			if not all(math.isfinite(number) for number in (first_number, second_number, third_number)):
 				raise ValueError
 		except (KeyError, TypeError, ValueError, json.JSONDecodeError):
 			self.send_error(400, "กรุณาส่งตัวเลขที่ถูกต้อง")
 			return
 
-		response_data = {"result": first_number + second_number}
+		response_data = {"result": first_number + second_number + third_number}
 		response_body = json.dumps(response_data).encode("utf-8")
 		self.send_response(200)
 		self.send_header("Content-Type", "application/json; charset=utf-8")

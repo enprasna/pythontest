@@ -1,6 +1,7 @@
 const additionForm = document.getElementById("addition-form");
 const firstNumberInput = document.getElementById("first-number");
 const secondNumberInput = document.getElementById("second-number");
+const thirdNumberInput = document.getElementById("third-number");
 const result = document.getElementById("result");
 
 additionForm.addEventListener("submit", async (event) => {
@@ -13,6 +14,7 @@ additionForm.addEventListener("submit", async (event) => {
 			body: JSON.stringify({
 				first: firstNumberInput.value,
 				second: secondNumberInput.value,
+				third: thirdNumberInput.value,
 			}),
 		});
 
@@ -25,6 +27,7 @@ additionForm.addEventListener("submit", async (event) => {
 	} catch (error) {
 		const firstNumber = Number(firstNumberInput.value);
 		const secondNumber = Number(secondNumberInput.value);
-		result.textContent = `ผลรวม: ${firstNumber + secondNumber}`;
+		const thirdNumber = Number(thirdNumberInput.value);
+		result.textContent = `ผลรวม: ${firstNumber + secondNumber + thirdNumber}`;
 	}
 });
